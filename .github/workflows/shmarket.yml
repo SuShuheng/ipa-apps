@@ -36,7 +36,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          tag=$(python -c 'import json; v = json.load(open("source.json"))["version"].split("."); print(".".join([v[0], v[1], str(int(v[2])+1)]))')
+          tag=$(python -c 'import json; v = json.load(open("source.json"))["marketVersion"].split("."); print(".".join([v[0], v[1], str(int(v[2])+1)]))')
           if gh release view "$tag" >/dev/null 2>&1; then
             echo "Release $tag already exists."
           else
@@ -53,7 +53,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - name: Synchronize the catalog version with the release tag
+      - name: Synchronize the market version with the release tag
         if: github.event_name == 'release'
         run: |
           python - <<'PY'
@@ -66,22 +66,27 @@ jobs:
           source = json.loads(path.read_text(encoding="utf-8"))
           event = json.loads(Path(os.environ["GITHUB_EVENT_PATH"]).read_text())
           tag = event["release"]["tag_name"]
-          if not re.fullmatch(r"(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)", tag):
+          if source.get("version") != 1:
+              raise SystemExit("AltSource schema version must remain the integer 1")
+          if not re.fullmatch(r"(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)", tag):
               raise SystemExit(f"Expected a numeric market release tag; got {tag!r}")
-          current = tuple(map(int, source["version"].split(".")))
+          current_text = source.get("marketVersion")
+          if not isinstance(current_text, str):
+              raise SystemExit("source.json marketVersion must be a semantic version string")
+          current = tuple(map(int, current_text.split(".")))
           released = tuple(map(int, tag.split(".")))
           if released > current:
               expected = (current[0], current[1], current[2] + 1)
               if released != expected:
                   raise SystemExit(f"Expected next tag {'.'.join(map(str, expected))}; got {tag}")
-              source["version"] = tag
-              path.write_text(json.dumps(source, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+              source["marketVersion"] = tag
+              path.write_text(json.dumps(source, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
           PY
           if ! git diff --quiet -- source.json; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add source.json
-            git commit -m "Sync catalog version with release tag"
+            git commit -m "Sync market version with release tag"
             git push origin HEAD:main
           fi
       - uses: actions/configure-pages@v5
