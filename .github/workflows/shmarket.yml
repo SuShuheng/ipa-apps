@@ -43,15 +43,12 @@ jobs:
             gh release create "$tag" --draft --target main --title "shmarket $tag" --notes "shmarket $tag"
           fi
 
-  publish:
+  build:
     if: (github.event_name == 'release' && !github.event.release.prerelease) || (github.ref == 'refs/heads/main' && !inputs.prepare_release)
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
     permissions:
       contents: write
-      pages: write
-      id-token: write
+      pages: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -92,7 +89,19 @@ jobs:
         run: |
           mkdir -p _site
           cp index.html source.json ./*.jpeg ./*.png _site/
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      actions: read
+      pages: write
+      id-token: write
+    steps:
       - uses: actions/deploy-pages@v4
+        id: deployment
