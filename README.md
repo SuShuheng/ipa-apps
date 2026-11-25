@@ -1,11 +1,22 @@
 # shmarket
 
-SuShuheng 自制 iOS 和 iPadOS 应用的 SideStore 软件源。
+shmarket 是 SuShuheng 自制 iOS 和 iPadOS 应用的 SideStore 软件源。添加一次后，你可以在 SideStore 里浏览已上架的应用、安装 IPA，并在发布新版本后更新。
 
-- [软件源主页](https://sushuheng.github.io/ipa-apps/)
-- [软件源地址](https://sushuheng.github.io/ipa-apps/source.json)
+[![Release 附件累计下载量](https://img.shields.io/github/downloads/SuShuheng/ipa-apps/total?style=flat-square&label=Release%20%E6%80%BB%E4%B8%8B%E8%BD%BD%E9%87%8F&color=167D64)](https://github.com/SuShuheng/ipa-apps/releases)
+[![最新正式发行版](https://img.shields.io/github/v/release/SuShuheng/ipa-apps?style=flat-square&label=%E6%9C%80%E6%96%B0%E5%8F%91%E8%A1%8C%E7%89%88&color=245FAD)](https://github.com/SuShuheng/ipa-apps/releases)
+[![GitHub Stars](https://img.shields.io/github/stars/SuShuheng/ipa-apps?style=flat-square&label=GitHub%20Stars&logo=github&color=A46613)](https://github.com/SuShuheng/ipa-apps/stargazers)
 
-在 SideStore 中打开 **Sources → ＋**，粘贴软件源地址即可订阅。
+下载量统计 GitHub Releases 中所有版本的附件下载次数。徽章随 GitHub 数据自动更新，显示可能受缓存影响。首个 Release 发布后，下载和版本徽章才会有发行数据。
+
+## 添加到 SideStore
+
+在已安装 SideStore 的 iPhone 或 iPad 上打开 [shmarket 主页](https://sushuheng.github.io/ipa-apps/)，点 **在 SideStore 中添加**。
+
+也可以在 SideStore 的 **Sources → ＋** 中粘贴下方地址，或直接前往 [GitHub Releases](https://github.com/SuShuheng/ipa-apps/releases) 查看发行记录。
+
+```text
+https://sushuheng.github.io/ipa-apps/source.json
+```
 
 ## 发布应用
 
