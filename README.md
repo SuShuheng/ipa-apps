@@ -1,4 +1,4 @@
-<p align="center"><img src="shmarket.jpeg" width="104" height="104" alt="shmarket 图标"></p>
+<p align="center"><img src="assets/shmarket.jpeg" width="104" height="104" alt="shmarket 图标"></p>
 
 <h1 align="center">shmarket</h1>
 
@@ -31,8 +31,8 @@ https://sushuheng.github.io/ipa-apps/source.json
 
 | 应用 | 介绍 | 获取方式 |
 | --- | --- | --- |
-| <img src="sidestore.png" width="32" alt=""> **SideStore** | 开源侧载工具，可在完成首次设置后安装和刷新应用。现收录 iOS / iPadOS 15.0 起的 `0.7.0-20261015.6+3990d5fb` 夜间构建。 | [shmarket 发行记录](https://github.com/SuShuheng/ipa-apps/releases/tag/1.0.0) · [SideStore 项目](https://github.com/SideStore/SideStore) |
+| <img src="assets/sidestore.png" width="32" alt=""> **SideStore** | 开源侧载工具，可在完成首次设置后安装和刷新应用。现收录 iOS / iPadOS 15.0 起的 `0.7.0-20261015.6+3990d5fb` 夜间构建。 | [shmarket 发行记录](https://github.com/SuShuheng/ipa-apps/releases/tag/1.0.0) · [SideStore 项目](https://github.com/SideStore/SideStore) |
 | <img src="https://raw.githubusercontent.com/Kianuni/Erosion-CN/main/PreviewIcon.png" width="32" alt=""> **Erosion-CN** | 中英双语系统配置与 MobileGestalt 研究工具箱。支持 iOS / iPadOS 27.0–27.2.1 与 27.3 beta 1，安装时需保留 App Group 权限。现收录 `1.0.7`（Build 32）和 `1.0.6`（Build 31）。 | [Erosion-CN 项目](https://github.com/Kianuni/Erosion-CN) · [官方发行记录](https://github.com/Kianuni/Erosion-CN/releases) |
-| **Shadowrocket** | 由 Shadow Launch Technology Limited 开发的付费规则代理工具。公共软件源不提供该付费 App 的 IPA 镜像。 | [App Store](https://apps.apple.com/us/app/shadowrocket/id932747118) |
+| <img src="assets/xhj.png" width="32" alt=""> **小火箭** | 按规则分流的第三方网络代理客户端，作用与 Shadowrocket、Clash 等工具类似，仅供学习研究使用。现收录 `2.2.29`（Build 1927），要求 iOS 9.0 或以上。 | [shmarket 发行记录](https://github.com/SuShuheng/ipa-apps/releases/tag/1.0.1) · [App Store](https://apps.apple.com/us/app/shadowrocket/id932747118) |
 
 > Erosion-CN 的 `worse_query` 已在 iOS / iPadOS 27.3 beta 2 起被 Apple 封堵。若依赖其完整功能，请保持受支持的系统和版本。

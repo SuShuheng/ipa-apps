@@ -6,8 +6,7 @@ on:
     paths:
       - index.html
       - source.json
-      - "*.jpeg"
-      - "*.png"
+      - "assets/**"
       - .github/workflows/shmarket.yml
   release:
     types: [published]
@@ -93,7 +92,8 @@ jobs:
       - name: Stage the public site
         run: |
           mkdir -p _site
-          cp index.html source.json ./*.jpeg ./*.png _site/
+          cp index.html source.json _site/
+          cp -R assets _site/
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site

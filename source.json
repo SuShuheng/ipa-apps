@@ -7,7 +7,7 @@
   "description": "收录 SuShuheng 分享的 iPhone 和 iPad 应用。应用由各自的上游项目开发，版本与系统要求见应用详情。",
   "website": "https://sushuheng.github.io/ipa-apps/",
   "sourceURL": "https://sushuheng.github.io/ipa-apps/source.json",
-  "iconURL": "https://sushuheng.github.io/ipa-apps/shmarket.jpeg",
+  "iconURL": "https://sushuheng.github.io/ipa-apps/assets/shmarket.jpeg",
   "tintColor": "#167D64",
   "featuredApps": [
     "com.SideStore.SideStore",
@@ -20,7 +20,7 @@
       "developerName": "SideStore Team",
       "subtitle": "在 iPhone 和 iPad 上安装与刷新侧载应用",
       "localizedDescription": "SideStore 是基于 AltStore 的开源侧载工具。首次设置完成后，可以在设备上安装和刷新侧载应用。此版本为夜间构建。",
-      "iconURL": "https://sushuheng.github.io/ipa-apps/sidestore.png",
+      "iconURL": "https://sushuheng.github.io/ipa-apps/assets/sidestore.png",
       "tintColor": "#6958D8",
       "versions": [
         {
@@ -71,6 +71,29 @@
           "minOSVersion": "26.0",
           "sha256": "72165f09450c9477dcd980b7f0858b8d93f881a825fb76ee2c3d62698d7d7e55",
           "localizedDescription": "1.0.6（Build 31）。新增广告白名单管理、淘宝开屏路径识别和电池信息兼容保护。完整支持 iOS / iPadOS 27.0–27.2.1 与 27.3 beta 1。"
+        }
+      ]
+    },
+    {
+      "name": "小火箭",
+      "bundleIdentifier": "com.liguangming.Shadowrocket",
+      "developerName": "Shadow Launch Technology Limited",
+      "subtitle": "按规则分流的网络代理客户端",
+      "localizedDescription": "小火箭（Shadowrocket）是一款基于规则的网络代理客户端，可导入订阅节点、按自定义规则分流并接管设备网络流量，作用与 Clash 等代理工具类似。本条目仅供学习研究使用。",
+      "iconURL": "https://sushuheng.github.io/ipa-apps/assets/xhj.png",
+      "tintColor": "#7B6CE0",
+      "category": "utilities",
+      "screenshots": [],
+      "versions": [
+        {
+          "version": "2.2.29",
+          "buildVersion": "1927",
+          "date": "2026-11-25",
+          "downloadURL": "https://github.com/SuShuheng/ipa-apps/releases/download/1.0.1/xhj-2.2.29.ipa",
+          "size": 25998307,
+          "minOSVersion": "9.0",
+          "sha256": "0b31575013bf5dda07273fe49a2dcf5c7bc299bce4eddf0e27e4cedfcf2dab69",
+          "localizedDescription": "2.2.29（Build 1927），要求 iOS 9.0 或以上。"
         }
       ]
     }

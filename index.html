@@ -2,45 +2,899 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>shmarket</title>
-  <link rel="icon" href="shmarket.jpeg">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>shmarket — SuShuheng 的 Apple 应用软件源</title>
+  <meta name="description" content="SuShuheng 分享的 iPhone 与 iPad 应用软件源，在 SideStore 中添加后即可安装与刷新。">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="shmarket">
+  <meta name="format-detection" content="telephone=no">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="shmarket — SuShuheng 的 Apple 应用软件源">
+  <meta property="og:description" content="收录精选的 iPhone 与 iPad 应用，在 SideStore 中添加软件源即可安装与刷新。">
+  <meta property="og:image" content="https://sushuheng.github.io/ipa-apps/assets/shmarket.jpeg">
+  <link rel="icon" href="assets/shmarket.jpeg">
+  <link rel="apple-touch-icon" href="assets/shmarket.jpeg">
   <style>
-    :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
-    body { margin: 0; }
-    main { max-width: 36rem; margin: 12vh auto; padding: 0 1.5rem; }
-    h1 { font-size: clamp(2.5rem, 10vw, 4.5rem); margin: 0; letter-spacing: -.04em; }
-    p { line-height: 1.6; }
-    nav { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
-    nav a { border: 1px solid currentColor; border-radius: .5rem; padding: .65rem .9rem; }
-    .primary { background: #164d3e; color: #fff; border-color: #164d3e; text-decoration: none; }
-    .icon { width: 5rem; height: 5rem; border-radius: 1.15rem; display: block; margin-bottom: 1rem; }
-    #market-version { color: GrayText; }
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --glow-a: rgba(15, 23, 42, .05);
+      --glow-b: rgba(123, 108, 224, .045);
+      --card: #ffffff;
+      --panel: rgba(255, 255, 255, .88);
+      --border: rgba(17, 24, 28, .10);
+      --border-soft: rgba(17, 24, 28, .06);
+      --text: #101214;
+      --muted: #565c62;
+      --faint: #63696f;
+      --brand: #167d64;
+      --brand-soft: rgba(22, 125, 100, .10);
+      --brand-ink: #0f5f4c;
+      --accent: #7b6ce0;
+      --on-brand: #ffffff;
+      --code-bg: rgba(17, 24, 28, .045);
+      --ring: rgba(22, 125, 100, .38);
+      --cta-bg: linear-gradient(135deg, #167d64 0%, #14785f 45%, #0f5f4c 100%);
+      --cta-text: #ffffff;
+      --cta-icon-bg: rgba(255, 255, 255, .18);
+      --cta-shadow:
+        0 14px 30px -16px rgba(16, 96, 77, .85),
+        inset 0 1px 0 rgba(255, 255, 255, .22);
+      --cta-shadow-hover:
+        0 18px 34px -16px rgba(16, 96, 77, .9),
+        inset 0 1px 0 rgba(255, 255, 255, .22);
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, .05);
+      --shadow-md: 0 18px 40px -24px rgba(15, 23, 42, .28);
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+              "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --bg: #0a0a0b;
+        --glow-a: rgba(255, 255, 255, .055);
+        --glow-b: rgba(123, 108, 224, .06);
+        --card: #151518;
+        --panel: rgba(21, 21, 24, .82);
+        --border: rgba(255, 255, 255, .10);
+        --border-soft: rgba(255, 255, 255, .07);
+        --text: #f5f5f7;
+        --muted: #a6a8ad;
+        --faint: #92959b;
+        --brand: #2fbf9a;
+        --brand-soft: rgba(47, 191, 154, .14);
+        --brand-ink: #63d9bb;
+        --accent: #9a8bf5;
+        --on-brand: #06231b;
+        --code-bg: rgba(255, 255, 255, .06);
+        --ring: rgba(47, 191, 154, .45);
+        --cta-bg: linear-gradient(135deg, #ffffff 0%, #f1f1f3 55%, #e6e6e9 100%);
+        --cta-text: #0b0b0d;
+        --cta-icon-bg: rgba(11, 11, 13, .08);
+        --cta-shadow:
+          0 14px 32px -16px rgba(0, 0, 0, .85),
+          inset 0 1px 0 rgba(255, 255, 255, .9);
+        --cta-shadow-hover:
+          0 18px 36px -16px rgba(0, 0, 0, .9),
+          inset 0 1px 0 rgba(255, 255, 255, .9);
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, .35);
+        --shadow-md: 0 22px 50px -26px rgba(0, 0, 0, .75);
+      }
+    }
+
+    *,
+    *::before,
+    *::after { box-sizing: border-box; }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100svh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(58rem 42rem at 12% -12%, var(--glow-a), transparent 62%),
+        radial-gradient(46rem 34rem at 104% 4%, var(--glow-b), transparent 60%);
+    }
+
+    ::selection {
+      background: var(--brand-soft);
+      color: var(--brand-ink);
+    }
+
+    a { color: inherit; }
+
+    :focus-visible {
+      outline: 3px solid var(--ring);
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 44rem;
+      margin: 0 auto;
+      padding:
+        calc(2.25rem + env(safe-area-inset-top))
+        max(1.25rem, env(safe-area-inset-right))
+        calc(2rem + env(safe-area-inset-bottom))
+        max(1.25rem, env(safe-area-inset-left));
+    }
+
+    /* ---------- Hero ---------- */
+
+    .hero-top {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hero-icon {
+      width: 4rem;
+      height: 4rem;
+      flex: none;
+      border-radius: 22%;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+      object-fit: cover;
+      background: var(--card);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      margin: 0;
+      font-size: .72rem;
+      font-weight: 650;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--brand);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: .4rem;
+      height: .4rem;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 0 4px var(--brand-soft);
+    }
+
+    h1 {
+      margin: .15rem 0 0;
+      font-size: clamp(2.4rem, 10.5vw, 3.9rem);
+      line-height: .98;
+      letter-spacing: -.045em;
+      font-weight: 800;
+    }
+
+    .tagline {
+      margin: 1.35rem 0 0;
+      font-size: clamp(1.05rem, 4.2vw, 1.3rem);
+      font-weight: 620;
+      letter-spacing: -.01em;
+    }
+
+    .lede {
+      max-width: 34rem;
+      margin: .4rem 0 0;
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.7;
+      text-wrap: pretty;
+    }
+
+    .market {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      margin: 1rem 0 0;
+      padding: .3rem .65rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 550;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .market::before {
+      content: "";
+      width: .35rem;
+      height: .35rem;
+      border-radius: 50%;
+      background: var(--brand);
+    }
+
+    /* ---------- Install panel ---------- */
+
+    .install {
+      margin-top: 1.85rem;
+      padding: clamp(1rem, 4vw, 1.4rem);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--panel);
+      box-shadow: var(--shadow-md);
+      -webkit-backdrop-filter: blur(16px) saturate(1.15);
+      backdrop-filter: blur(16px) saturate(1.15);
+    }
+
+    .button {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      min-height: 3.5rem;
+      padding: .85rem 1rem;
+      border-radius: var(--radius-md);
+      background: var(--cta-bg);
+      color: var(--cta-text);
+      box-shadow: var(--cta-shadow);
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: -.005em;
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    }
+
+    .button:hover {
+      filter: brightness(1.04);
+      transform: translateY(-1px);
+      box-shadow: var(--cta-shadow-hover);
+    }
+
+    .button:active { transform: scale(.99); }
+
+    .button-icon {
+      display: grid;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      flex: none;
+      border-radius: 50%;
+      background: var(--cta-icon-bg);
+    }
+
+    .button-icon svg { width: 1.05rem; height: 1.05rem; }
+
+    .button-label { flex: 1; }
+
+    .button-arrow {
+      flex: none;
+      opacity: .85;
+      transition: transform .18s ease;
+    }
+
+    .button-arrow svg { width: 1.1rem; height: 1.1rem; display: block; }
+
+    .button:hover .button-arrow { transform: translateX(2px); }
+
+    .copy-row {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      width: 100%;
+      margin-top: .65rem;
+      padding: .35rem .35rem .35rem .85rem;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      background: var(--code-bg);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: border-color .16s ease, background .16s ease;
+    }
+
+    .copy-row:hover {
+      border-color: var(--brand);
+      background: var(--brand-soft);
+    }
+
+    .copy-row:active { transform: scale(.995); }
+
+    .source-url {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      font-family: var(--mono);
+      font-size: .78rem;
+      line-height: 1.5;
+      color: var(--muted);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      direction: ltr;
+    }
+
+    .copy {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      min-height: 2.75rem;
+      min-width: 2.75rem;
+      padding: 0 .8rem;
+      border-radius: calc(var(--radius-sm) - 4px);
+      background: var(--brand-soft);
+      color: var(--brand-ink);
+      font-size: .82rem;
+      font-weight: 650;
+      pointer-events: none;
+      transition: background .16s ease, color .16s ease;
+    }
+
+    .copy svg { width: 1rem; height: 1rem; flex: none; }
+
+    .copy-row.is-copied {
+      border-color: var(--brand);
+      background: var(--brand-soft);
+    }
+
+    .copy-row.is-copied .copy {
+      background: var(--brand);
+      color: var(--on-brand);
+    }
+
+    .install-hint {
+      margin: .7rem .2rem 0;
+      color: var(--faint);
+      font-size: .78rem;
+      line-height: 1.65;
+      text-wrap: pretty;
+    }
+
+    /* ---------- Catalog ---------- */
+
+    .catalog { margin-top: 2.4rem; }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: .75rem;
+      margin-bottom: .75rem;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: -.01em;
+    }
+
+    .count {
+      padding: .18rem .55rem;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand-ink);
+      font-size: .72rem;
+      font-weight: 650;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .app-list {
+      display: grid;
+      gap: .6rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .app {
+      display: flex;
+      align-items: flex-start;
+      gap: .8rem;
+      padding: .85rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--card);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .app-icon {
+      width: 2.9rem;
+      height: 2.9rem;
+      flex: none;
+      overflow: hidden;
+      border-radius: 26%;
+      background: var(--code-bg);
+      box-shadow: inset 0 0 0 1px var(--border-soft);
+    }
+
+    .app-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .app-icon.is-fallback {
+      display: grid;
+      place-items: center;
+      background: linear-gradient(140deg, var(--brand), var(--accent));
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      box-shadow: none;
+    }
+
+    .app-body { min-width: 0; flex: 1; }
+
+    .app-head {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .3rem .45rem;
+    }
+
+    .app-name {
+      margin: 0;
+      font-size: .96rem;
+      font-weight: 680;
+      letter-spacing: -.005em;
+      line-height: 1.35;
+    }
+
+    .app-dev {
+      color: var(--faint);
+      font-size: .72rem;
+      font-weight: 500;
+    }
+
+    .badge {
+      padding: .08rem .4rem;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand-ink);
+      font-size: .64rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .app-sub {
+      display: -webkit-box;
+      margin: .18rem 0 0;
+      overflow: hidden;
+      color: var(--muted);
+      font-size: .8rem;
+      line-height: 1.5;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .app-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .3rem .5rem;
+      margin: .4rem 0 0;
+      color: var(--faint);
+      font-size: .7rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .app-version {
+      padding: .1rem .4rem;
+      border-radius: 6px;
+      background: var(--code-bg);
+      color: var(--muted);
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+
+    .app-meta .meta-text { min-width: 0; }
+
+    /* ---------- Loading skeleton ---------- */
+
+    .skeleton .app-icon,
+    .skeleton .line {
+      background: linear-gradient(90deg, var(--code-bg) 25%, var(--brand-soft) 50%, var(--code-bg) 75%);
+      background-size: 220% 100%;
+      animation: shimmer 1.5s linear infinite;
+    }
+
+    .skeleton .line {
+      height: .55rem;
+      border-radius: 999px;
+    }
+
+    .skeleton .line.short { width: 42%; margin-top: .45rem; }
+
+    @keyframes shimmer {
+      from { background-position: 120% 0; }
+      to { background-position: -120% 0; }
+    }
+
+    .notice {
+      margin: .85rem 0 0;
+      color: var(--faint);
+      font-size: .8rem;
+    }
+
+    /* ---------- Footer ---------- */
+
+    .footer {
+      margin-top: 2.75rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.75rem;
+      padding: 0 .85rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--card);
+      color: var(--muted);
+      font-size: .8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color .16s ease, border-color .16s ease, transform .16s ease;
+    }
+
+    .footer-links a:hover {
+      border-color: var(--brand);
+      color: var(--brand-ink);
+      transform: translateY(-1px);
+    }
+
+    .footer-note {
+      margin: 1rem 0 0;
+      color: var(--faint);
+      font-size: .72rem;
+      line-height: 1.6;
+    }
+
+    /* ---------- Larger screens ---------- */
+
+    @media (min-width: 40rem) {
+      .page { padding-top: calc(3.25rem + env(safe-area-inset-top)); }
+      .hero-icon { width: 4.75rem; height: 4.75rem; }
+      .install { margin-top: 2.1rem; }
+      .app-list { grid-template-columns: 1fr 1fr; gap: .7rem; }
+      .app { height: 100%; }
+    }
+
+    @media (min-width: 64rem) {
+      .page { max-width: 48rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <img class="icon" src="shmarket.jpeg" alt="" width="80" height="80">
-    <h1>shmarket</h1>
-    <p>SuShuheng 分享的 Apple 应用</p>
-    <p id="market-version" hidden></p>
-    <nav aria-label="软件源">
-      <a class="primary" href="sidestore://source?url=https%3A%2F%2Fsushuheng.github.io%2Fipa-apps%2Fsource.json">在 SideStore 中添加</a>
-      <a href="source.json">软件源 JSON</a>
-      <a href="https://github.com/SuShuheng/ipa-apps/releases">GitHub Releases</a>
-    </nav>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-top">
+        <img class="hero-icon" src="assets/shmarket.jpeg" alt="shmarket 图标" width="88" height="88">
+        <div class="hero-meta">
+          <p class="eyebrow">SideStore 软件源</p>
+          <h1>shmarket</h1>
+        </div>
+      </div>
+      <p class="tagline">SuShuheng 分享的 Apple 应用</p>
+      <p class="lede">收录精选的 iPhone 与 iPad 应用。在 SideStore 中添加软件源，即可浏览、安装并随时刷新。</p>
+      <p class="market" id="market-version" hidden>市场版本 <span id="market-version-value"></span></p>
+    </header>
+
+    <section class="install" aria-label="添加软件源">
+      <a class="button" href="sidestore://source?url=https%3A%2F%2Fsushuheng.github.io%2Fipa-apps%2Fsource.json">
+        <span class="button-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </span>
+        <span class="button-label">在 SideStore 中添加</span>
+        <span class="button-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h13M13 6l6 6-6 6"/>
+          </svg>
+        </span>
+      </a>
+
+      <button class="copy-row" type="button" data-copy="https://sushuheng.github.io/ipa-apps/source.json" aria-label="复制软件源地址">
+        <code class="source-url">https://sushuheng.github.io/ipa-apps/source.json</code>
+        <span class="copy" aria-hidden="true">
+          <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="11" height="11" rx="2.5"/>
+            <path d="M6.5 15H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v.5"/>
+          </svg>
+          <span class="copy-label">复制</span>
+        </span>
+      </button>
+      <span class="sr-only" role="status" id="copy-status"></span>
+
+      <p class="install-hint">在 iPhone 或 iPad 上用 Safari 打开本页后点按上方按钮；也可以把地址粘贴到 SideStore 的 Sources → ＋。</p>
+    </section>
+
+    <section class="catalog" aria-labelledby="catalog-title">
+      <div class="section-head">
+        <h2 id="catalog-title">收录的应用</h2>
+        <span class="count" id="app-count" hidden></span>
+      </div>
+
+      <ul class="app-list" id="app-list" aria-busy="true">
+        <li class="app skeleton" aria-hidden="true">
+          <div class="app-icon"></div>
+          <div class="app-body">
+            <div class="line" style="width: 38%"></div>
+            <div class="line short"></div>
+            <div class="line" style="width: 55%; margin-top: .45rem"></div>
+          </div>
+        </li>
+        <li class="app skeleton" aria-hidden="true">
+          <div class="app-icon"></div>
+          <div class="app-body">
+            <div class="line" style="width: 46%"></div>
+            <div class="line short"></div>
+            <div class="line" style="width: 48%; margin-top: .45rem"></div>
+          </div>
+        </li>
+      </ul>
+
+      <p class="notice" id="catalog-notice" hidden></p>
+    </section>
+
+    <footer class="footer">
+      <nav class="footer-links" aria-label="更多链接">
+        <a href="source.json">软件源 JSON</a>
+        <a href="https://github.com/SuShuheng/ipa-apps/releases">发行记录</a>
+        <a href="https://github.com/SuShuheng/ipa-apps">GitHub</a>
+      </nav>
+      <p class="footer-note">应用版权归各自开发者所有。数据来自 source.json，页面会随软件源更新。</p>
+    </footer>
   </main>
+
+  <noscript>
+    <style>#app-list { display: none; } #app-count { display: none; }</style>
+  </noscript>
+
   <script>
-    async function showMarketVersion() {
-      const response = await fetch("source.json");
-      if (!response.ok) return;
-      const { marketVersion } = await response.json();
-      if (!marketVersion) return;
-      const label = document.querySelector("#market-version");
-      label.textContent = `市场版本 ${marketVersion}`;
-      label.hidden = false;
-    }
-    showMarketVersion().catch(() => {});
+    (function () {
+      "use strict";
+
+      var list = document.getElementById("app-list");
+      var countChip = document.getElementById("app-count");
+      var notice = document.getElementById("catalog-notice");
+      var market = document.getElementById("market-version");
+      var marketValue = document.getElementById("market-version-value");
+      var copyButton = document.querySelector(".copy-row");
+      var copyLabel = copyButton ? copyButton.querySelector(".copy-label") : null;
+      var copyStatus = document.getElementById("copy-status");
+
+      var FEATURED_FALLBACK = [];
+
+      function text(node, value) {
+        node.textContent = value;
+      }
+
+      function renderMarket(version) {
+        if (!version || !market) return;
+        text(marketValue, version);
+        market.hidden = false;
+      }
+
+      function iconFor(app) {
+        var holder = document.createElement("div");
+        holder.className = "app-icon";
+        var fallback = function () {
+          holder.classList.add("is-fallback");
+          holder.textContent = (app.name || "?").trim().charAt(0);
+        };
+        if (!app.iconURL) {
+          fallback();
+          return holder;
+        }
+        var img = document.createElement("img");
+        img.src = app.iconURL;
+        img.alt = "";
+        img.width = 46;
+        img.height = 46;
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.addEventListener("error", function () {
+          img.remove();
+          fallback();
+        });
+        holder.appendChild(img);
+        return holder;
+      }
+
+      function metaFor(app) {
+        var meta = document.createElement("p");
+        meta.className = "app-meta";
+        var versions = Array.isArray(app.versions) ? app.versions : [];
+        var latest = versions[0] || {};
+
+        if (latest.version) {
+          var version = document.createElement("span");
+          version.className = "app-version";
+          version.textContent = "v" + latest.version;
+          if (latest.date) version.title = "发布于 " + String(latest.date).slice(0, 10);
+          meta.appendChild(version);
+        }
+
+        var parts = [];
+        if (latest.minOSVersion) parts.push("iOS " + latest.minOSVersion + "+");
+        if (versions.length > 1) parts.push(versions.length + " 个版本");
+
+        if (parts.length) {
+          var detail = document.createElement("span");
+          detail.className = "meta-text";
+          detail.textContent = parts.join(" · ");
+          meta.appendChild(detail);
+        }
+
+        return meta.childElementCount ? meta : null;
+      }
+
+      function renderApps(data) {
+        var apps = Array.isArray(data.apps) ? data.apps : [];
+        var featured = Array.isArray(data.featuredApps) ? data.featuredApps : FEATURED_FALLBACK;
+
+        list.textContent = "";
+        list.setAttribute("aria-busy", "false");
+
+        if (!apps.length) {
+          notice.textContent = "这个软件源暂时还没有收录应用。";
+          notice.hidden = false;
+          return;
+        }
+
+        apps.forEach(function (app) {
+          var item = document.createElement("li");
+          item.className = "app";
+          item.appendChild(iconFor(app));
+
+          var body = document.createElement("div");
+          body.className = "app-body";
+
+          var head = document.createElement("div");
+          head.className = "app-head";
+          var name = document.createElement("p");
+          name.className = "app-name";
+          name.textContent = app.name || app.bundleIdentifier || "未命名应用";
+          head.appendChild(name);
+          if (featured.indexOf(app.bundleIdentifier) !== -1) {
+            var badge = document.createElement("span");
+            badge.className = "badge";
+            badge.textContent = "推荐";
+            head.appendChild(badge);
+          }
+          if (app.developerName) {
+            var dev = document.createElement("span");
+            dev.className = "app-dev";
+            dev.textContent = app.developerName;
+            head.appendChild(dev);
+          }
+          body.appendChild(head);
+
+          if (app.subtitle) {
+            var sub = document.createElement("p");
+            sub.className = "app-sub";
+            sub.textContent = app.subtitle;
+            body.appendChild(sub);
+          }
+
+          var meta = metaFor(app);
+          if (meta) body.appendChild(meta);
+
+          item.appendChild(body);
+          list.appendChild(item);
+        });
+
+        countChip.textContent = apps.length + " 款";
+        countChip.hidden = false;
+      }
+
+      function fail() {
+        list.textContent = "";
+        list.setAttribute("aria-busy", "false");
+        notice.textContent = "应用列表加载失败，可以直接打开 source.json 查看。";
+        notice.hidden = false;
+      }
+
+      function load() {
+        fetch("source.json", { cache: "no-cache" })
+          .then(function (response) {
+            if (!response.ok) throw new Error("HTTP " + response.status);
+            return response.json();
+          })
+          .then(function (data) {
+            renderMarket(data.marketVersion);
+            renderApps(data);
+          })
+          .catch(fail);
+      }
+
+      if (copyButton) {
+        copyButton.addEventListener("click", function () {
+          var value = copyButton.getAttribute("data-copy") || "";
+          var done = function () {
+            copyButton.classList.add("is-copied");
+            copyLabel.textContent = "已复制";
+            copyStatus.textContent = "软件源地址已复制";
+            window.setTimeout(function () {
+              copyButton.classList.remove("is-copied");
+              copyLabel.textContent = "复制";
+            }, 1800);
+          };
+          var fallbackCopy = function () {
+            var input = document.createElement("textarea");
+            input.value = value;
+            input.setAttribute("readonly", "");
+            input.style.position = "fixed";
+            input.style.opacity = "0";
+            document.body.appendChild(input);
+            input.select();
+            try { document.execCommand("copy"); } catch (error) { /* ignore */ }
+            input.remove();
+            done();
+          };
+          if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(value).then(done, fallbackCopy);
+          } else {
+            fallbackCopy();
+          }
+        });
+      }
+
+      load();
+    })();
   </script>
 </body>
 </html>
