@@ -1,7 +1,8 @@
 {
   "name": "shmarket",
   "identifier": "com.sushuheng.shmarket",
-  "version": "1.0.1",
+  "version": 1,
+  "marketVersion": "1.0.1",
   "subtitle": "SuShuheng 分享的 Apple 应用",
   "description": "收录 SuShuheng 分享的 iPhone 和 iPad 应用。应用由各自的上游项目开发，版本与系统要求见应用详情。",
   "website": "https://sushuheng.github.io/ipa-apps/",
