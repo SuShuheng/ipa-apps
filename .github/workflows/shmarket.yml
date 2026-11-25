@@ -1,0 +1,98 @@
+name: Publish shmarket catalog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - source.json
+      - "*.jpeg"
+      - "*.png"
+      - .github/workflows/shmarket.yml
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      prepare_release:
+        description: "Create a draft for the next patch release"
+        type: boolean
+        default: false
+
+concurrency:
+  group: shmarket-catalog
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && inputs.prepare_release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Create the next release draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag=$(python -c 'import json; v = json.load(open("source.json"))["version"].split("."); print(".".join([v[0], v[1], str(int(v[2])+1)]))')
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "Release $tag already exists."
+          else
+            gh release create "$tag" --draft --target main --title "shmarket $tag" --notes "shmarket $tag"
+          fi
+
+  publish:
+    if: (github.event_name == 'release' && !github.event.release.prerelease) || (github.ref == 'refs/heads/main' && !inputs.prepare_release)
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Synchronize the catalog version with the release tag
+        if: github.event_name == 'release'
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import re
+          from pathlib import Path
+
+          path = Path("source.json")
+          source = json.loads(path.read_text(encoding="utf-8"))
+          event = json.loads(Path(os.environ["GITHUB_EVENT_PATH"]).read_text())
+          tag = event["release"]["tag_name"]
+          if not re.fullmatch(r"(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)", tag):
+              raise SystemExit(f"Expected a numeric market release tag; got {tag!r}")
+          current = tuple(map(int, source["version"].split(".")))
+          released = tuple(map(int, tag.split(".")))
+          if released > current:
+              expected = (current[0], current[1], current[2] + 1)
+              if released != expected:
+                  raise SystemExit(f"Expected next tag {'.'.join(map(str, expected))}; got {tag}")
+              source["version"] = tag
+              path.write_text(json.dumps(source, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          PY
+          if ! git diff --quiet -- source.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add source.json
+            git commit -m "Sync catalog version with release tag"
+            git push origin HEAD:main
+          fi
+      - uses: actions/configure-pages@v5
+      - name: Stage the public site
+        run: |
+          mkdir -p _site
+          cp index.html source.json ./*.jpeg ./*.png _site/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - uses: actions/deploy-pages@v4
