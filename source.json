@@ -1,7 +1,7 @@
 {
   "name": "shmarket",
   "identifier": "com.sushuheng.shmarket",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "subtitle": "SuShuheng 分享的 Apple 应用",
   "description": "收录 SuShuheng 分享的 iPhone 和 iPad 应用。应用由各自的上游项目开发，版本与系统要求见应用详情。",
   "website": "https://sushuheng.github.io/ipa-apps/",
@@ -9,7 +9,8 @@
   "iconURL": "https://sushuheng.github.io/ipa-apps/shmarket.jpeg",
   "tintColor": "#167D64",
   "featuredApps": [
-    "com.SideStore.SideStore"
+    "com.SideStore.SideStore",
+    "com.jbdotparty.Erosion"
   ],
   "apps": [
     {
@@ -32,7 +33,54 @@
           "localizedDescription": "2026 年 10 月 15 日夜间构建，对应上游提交 3990d5fb。"
         }
       ]
+    },
+    {
+      "name": "Erosion-CN",
+      "bundleIdentifier": "com.jbdotparty.Erosion",
+      "developerName": "Kianuni",
+      "subtitle": "iOS / iPadOS 系统配置与 MobileGestalt 研究工具箱（中英双语）",
+      "localizedDescription": "Erosion-CN 是面向 iOS / iPadOS 27.0–27.2.1 与 27.3 beta 1（及 26.x 部分功能）的中英双语系统配置与 MobileGestalt 研究工具箱。安装时请保留 App Group 权限。Apple 已从 iOS / iPadOS 27.3 beta 2 开始封堵 worse_query。",
+      "iconURL": "https://raw.githubusercontent.com/Kianuni/Erosion-CN/main/PreviewIcon.png",
+      "tintColor": "#CF7D46",
+      "category": "utilities",
+      "screenshots": [],
+      "appPermissions": {
+        "entitlements": [
+          "com.apple.security.application-groups"
+        ],
+        "privacy": {}
+      },
+      "versions": [
+        {
+          "version": "1.0.7",
+          "buildVersion": "32",
+          "date": "2026-11-25T03:13:04Z",
+          "downloadURL": "https://github.com/Kianuni/Erosion-CN/releases/download/v1.0.7/Erosion_v1.0.7_Bilingual.ipa",
+          "size": 6948364,
+          "minOSVersion": "26.0",
+          "sha256": "053796a918eb48b12d8f857ad0b666c9fe584296e9934367751837974cc44e19",
+          "localizedDescription": "1.0.7（Build 32）。扩充开屏广告缓存路径识别，并补全官方 Bundle ID 中英文显示名。完整支持 iOS / iPadOS 27.0–27.2.1 与 27.3 beta 1。"
+        },
+        {
+          "version": "1.0.6",
+          "buildVersion": "31",
+          "date": "2026-11-19T13:48:12Z",
+          "downloadURL": "https://github.com/Kianuni/Erosion-CN/releases/download/v1.0.6/Erosion_v1.0.6_Bilingual.ipa",
+          "size": 6948787,
+          "minOSVersion": "26.0",
+          "sha256": "72165f09450c9477dcd980b7f0858b8d93f881a825fb76ee2c3d62698d7d7e55",
+          "localizedDescription": "1.0.6（Build 31）。新增广告白名单管理、淘宝开屏路径识别和电池信息兼容保护。完整支持 iOS / iPadOS 27.0–27.2.1 与 27.3 beta 1。"
+        }
+      ]
     }
   ],
-  "news": []
+  "news": [
+    {
+      "title": "Erosion-CN 已加入 shmarket",
+      "identifier": "erosion-cn-1.0.7",
+      "caption": "Erosion-CN 1.0.7 现已可通过 shmarket 获取。支持 iOS / iPadOS 27.0–27.2.1 与 27.3 beta 1；27.3 beta 2 起 worse_query 已被封堵。",
+      "date": "2026-11-25T03:13:04Z",
+      "tintColor": "#CF7D46"
+    }
+  ]
 }
