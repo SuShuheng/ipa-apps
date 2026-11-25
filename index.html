@@ -34,10 +34,10 @@
     async function showMarketVersion() {
       const response = await fetch("source.json");
       if (!response.ok) return;
-      const { version } = await response.json();
-      if (!version) return;
+      const { marketVersion } = await response.json();
+      if (!marketVersion) return;
       const label = document.querySelector("#market-version");
-      label.textContent = `市场版本 ${version}`;
+      label.textContent = `市场版本 ${marketVersion}`;
       label.hidden = false;
     }
     showMarketVersion().catch(() => {});
