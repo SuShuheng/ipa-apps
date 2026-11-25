@@ -29,7 +29,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: main
       - name: Create the next release draft
@@ -50,7 +50,7 @@ jobs:
       contents: write
       pages: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: main
       - name: Synchronize the market version with the release tag
@@ -68,7 +68,7 @@ jobs:
           tag = event["release"]["tag_name"]
           if source.get("version") != 1:
               raise SystemExit("AltSource schema version must remain the integer 1")
-          if not re.fullmatch(r"(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)", tag):
+          if not re.fullmatch(r"(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)", tag):
               raise SystemExit(f"Expected a numeric market release tag; got {tag!r}")
           current_text = source.get("marketVersion")
           if not isinstance(current_text, str):
@@ -80,7 +80,7 @@ jobs:
               if released != expected:
                   raise SystemExit(f"Expected next tag {'.'.join(map(str, expected))}; got {tag}")
               source["marketVersion"] = tag
-              path.write_text(json.dumps(source, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+              path.write_text(json.dumps(source, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
           PY
           if ! git diff --quiet -- source.json; then
             git config user.name "github-actions[bot]"
