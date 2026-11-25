@@ -1,8 +1,38 @@
 {
   "name": "shmarket",
   "identifier": "com.sushuheng.shmarket",
-  "subtitle": "SuShuheng 的 iOS 和 iPadOS 应用",
+  "version": "1.0.0",
+  "subtitle": "SuShuheng 分享的 Apple 应用",
+  "description": "收录 SuShuheng 分享的 iPhone 和 iPad 应用。应用由各自的上游项目开发，版本与系统要求见应用详情。",
   "website": "https://sushuheng.github.io/ipa-apps/",
-  "apps": [],
+  "sourceURL": "https://sushuheng.github.io/ipa-apps/source.json",
+  "iconURL": "https://sushuheng.github.io/ipa-apps/shmarket.jpeg",
+  "tintColor": "#167D64",
+  "featuredApps": [
+    "com.SideStore.SideStore"
+  ],
+  "apps": [
+    {
+      "name": "SideStore",
+      "bundleIdentifier": "com.SideStore.SideStore",
+      "developerName": "SideStore Team",
+      "subtitle": "在 iPhone 和 iPad 上安装与刷新侧载应用",
+      "localizedDescription": "SideStore 是基于 AltStore 的开源侧载工具。首次设置完成后，可以在设备上安装和刷新侧载应用。此版本为夜间构建。",
+      "iconURL": "https://sushuheng.github.io/ipa-apps/sidestore.png",
+      "tintColor": "#6958D8",
+      "versions": [
+        {
+          "version": "0.7.0-20261015.6+3990d5fb",
+          "buildVersion": "0700",
+          "date": "2026-10-15",
+          "downloadURL": "https://github.com/SuShuheng/ipa-apps/releases/download/1.0.0/SideStore-0.7.0-20261015.6.ipa",
+          "size": 31159223,
+          "minOSVersion": "15.0",
+          "sha256": "052efbdb6d5d5330726d005a890628cac304070c7c6c47652c364004db2e7635",
+          "localizedDescription": "2026 年 10 月 15 日夜间构建，对应上游提交 3990d5fb。"
+        }
+      ]
+    }
+  ],
   "news": []
 }

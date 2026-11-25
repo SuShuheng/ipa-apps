@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>shmarket</title>
+  <link rel="icon" href="shmarket.jpeg">
   <style>
     :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
     body { margin: 0; }
@@ -13,17 +14,33 @@
     nav { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
     nav a { border: 1px solid currentColor; border-radius: .5rem; padding: .65rem .9rem; }
     .primary { background: #164d3e; color: #fff; border-color: #164d3e; text-decoration: none; }
+    .icon { width: 5rem; height: 5rem; border-radius: 1.15rem; display: block; margin-bottom: 1rem; }
+    #market-version { color: GrayText; }
   </style>
 </head>
 <body>
   <main>
+    <img class="icon" src="shmarket.jpeg" alt="" width="80" height="80">
     <h1>shmarket</h1>
-    <p>SuShuheng 自制 iOS 和 iPadOS 应用的 SideStore 软件源。</p>
+    <p>SuShuheng 分享的 Apple 应用</p>
+    <p id="market-version" hidden></p>
     <nav aria-label="软件源">
       <a class="primary" href="sidestore://source?url=https%3A%2F%2Fsushuheng.github.io%2Fipa-apps%2Fsource.json">在 SideStore 中添加</a>
       <a href="source.json">软件源 JSON</a>
       <a href="https://github.com/SuShuheng/ipa-apps/releases">GitHub Releases</a>
     </nav>
   </main>
+  <script>
+    async function showMarketVersion() {
+      const response = await fetch("source.json");
+      if (!response.ok) return;
+      const { version } = await response.json();
+      if (!version) return;
+      const label = document.querySelector("#market-version");
+      label.textContent = `市场版本 ${version}`;
+      label.hidden = false;
+    }
+    showMarketVersion().catch(() => {});
+  </script>
 </body>
 </html>
